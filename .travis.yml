@@ -15,4 +15,4 @@ after_success:
   - docker build -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$TAG
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker login -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" && docker push $REPO
+  - docker login quay.io -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD" && docker push $REPO
