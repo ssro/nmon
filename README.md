@@ -11,7 +11,7 @@ Nmon performance utility inside a docker container. Monitor your docker machine(
 ### Build & run:
 
 ```
-$ git clone https://github.com/ssro/nmon.git
+$ git clone https://github.com/ssro/nmon.git && cd nmon
 $ docker build -t nmon .
 $ docker run --rm --name nmon --pid=host --net=host --privileged -it nmon
 ```
