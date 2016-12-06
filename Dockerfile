@@ -4,7 +4,8 @@ RUN yum -y update && \
 	yum -y install deltarpm \
 	curl \
 	lshw \
-	net-tools && yum -y clean all
+	net-tools && yum -y clean all \
+	&& rm -rf /tmp/* /var/tmp/*
 
 WORKDIR /opt/nmon
 
