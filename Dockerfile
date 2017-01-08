@@ -1,10 +1,10 @@
 FROM centos:latest
 
-RUN yum -y update && \
-	yum -y install deltarpm \
+RUN yum -y install epel-release \
+	deltarpm \
 	curl \
 	lshw \
-	net-tools && yum -y clean all \
+	net-tools && yum -y update \
 	&& rm -rf /tmp/* /var/tmp/*
 
 WORKDIR /opt/nmon
