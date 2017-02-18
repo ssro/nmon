@@ -1,5 +1,5 @@
 FROM centos:latest
-
+MAINTAINER Sebastian Sasu <sebastian@nologin.ro>
 RUN yum -y install epel-release \
 	deltarpm \
 	curl \
@@ -8,8 +8,8 @@ RUN yum -y install epel-release \
 	&& rm -rf /tmp/* /var/tmp/*
 
 WORKDIR /opt/nmon
-
-RUN curl -L -o nmon https://github.com/axibase/nmon/releases/download/16f/nmon_x86_rhel6 && \
+ENV NMON_VER="16f"
+RUN curl -L -o nmon https://github.com/axibase/nmon/releases/download/$NMON_VER/nmon_x86_rhel6 && \
 	chmod +x nmon
 
 ENV PATH /opt/nmon:$PATH
