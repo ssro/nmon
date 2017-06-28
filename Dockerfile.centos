@@ -1,0 +1,13 @@
+FROM centos:latest
+
+LABEL maintainer Sebastian Sasu <sebi@nologin.ro>
+
+ENV NMON_VER="16f"
+
+RUN yum -y update \
+	&& yum -y install lshw net-tools \
+	&& yum -y clean all && rm -rf /tmp/* /var/tmp/* /var/cache/yum/* \
+	&& curl -L -o /usr/bin/nmon https://github.com/axibase/nmon/releases/download/$NMON_VER/nmon_x86_rhel6 \
+	&& chmod +x /usr/bin/nmon
+
+CMD ["/usr/bin/nmon"]

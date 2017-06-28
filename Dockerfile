@@ -1,22 +1,13 @@
-FROM centos:latest
+FROM debian:stretch-slim
 
 LABEL maintainer Sebastian Sasu <sebi@nologin.ro>
 
-RUN yum -y install epel-release \
-	deltarpm \
-	curl \
-	lshw \
-	net-tools && yum -y update
-
-WORKDIR /opt/nmon
-
 ENV NMON_VER="16f"
 
-RUN curl -L -o nmon https://github.com/axibase/nmon/releases/download/$NMON_VER/nmon_x86_rhel6 \
-	&& chmod +x nmon \
-	&& yum -y remove epel-release deltarpm \
-	&& yum -y clean all && rm -rf /tmp/* /var/tmp/* /var/cache/yum/*
+RUN apt -y update && apt -y upgrade \
+  && apt -y install curl libncurses5 \
+  && curl -L -o /usr/bin/nmon https://github.com/axibase/nmon/releases/download/$NMON_VER/nmon_x86_ubuntu1404 \
+  && chmod +x /usr/bin/nmon \
+  && apt --purge -y remove curl && apt -y autoremove && rm -rf /var/lib/apt/lists/*
 
-ENV PATH /opt/nmon:$PATH
-
-CMD ["nmon"]
+CMD ["/usr/bin/nmon"]
